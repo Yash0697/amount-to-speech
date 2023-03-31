@@ -24,6 +24,12 @@ public class AmountReaderTest {
         amountWords = amountReader.findAmountPronounciation(9999999);
         System.out.println(amountWords);
         textToSpeech(amountWords);
+        amountWords = amountReader.findAmountPronounciation(2005);
+        System.out.println(amountWords);
+        textToSpeech(amountWords);
+        amountWords = amountReader.findAmountPronounciation(105);
+        System.out.println(amountWords);
+        textToSpeech(amountWords);
     }
 
     private static void textToSpeech(String text) {

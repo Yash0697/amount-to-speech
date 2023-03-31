@@ -9,22 +9,22 @@ public class AmountReader {
     private Map<Integer, String> pronounciations;
 
     public AmountReader() {
-        pronounciations = new HashMap<>();
-        List<String> words = Arrays.asList("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
-                    "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twentee"
+    	pronounciations = new HashMap<>();
+        List<String> words = Arrays.asList("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+                    "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty"
         );
         for(int i = 1; i < 21; i++) {
             pronounciations.put(i, words.get(i - 1));
         }
-        words = Arrays.asList("thirty", "fourtee", "fiftee", "sixtee", "seventee", "eightee", "ninetee",
-        "hundred", "thousand", "lac");
+        words = Arrays.asList("Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety",
+        "Hundred", "Thousand", "Lac");
 
         for(int i = 3; i <= 10; i++) {
             pronounciations.put(i * 10, words.get(i - 3));
         }
 
         pronounciations.put(1000, words.get(8));
-        pronounciations.put(10000, words.get(9));
+        pronounciations.put(100000, words.get(9));
 
     }    
 
@@ -39,8 +39,8 @@ public class AmountReader {
             tens = amtString.substring(length - 2);
         if(length >= 3)
             hundreds = amtString.substring(length - 3, length - 2);
-        if(length >= 5)
-            thousands = amtString.substring(length - 5, length - 3);
+        if(length >= 4)
+        	thousands = amtString.substring(Math.max(0, length - 5), length - 3);
         if(length >= 6)
             lacs = amtString.substring(0, length - 5);
 
@@ -52,14 +52,14 @@ public class AmountReader {
         if(thousands != null) {
             String words = convertToWords(thousands);
             sb.append(words);
-            String toAppend = words.length() > 0 ? " thousand ": "";
+            String toAppend = words.length() > 0 ? " Thousand ": "";
             sb.append(toAppend);
         }
 
         if(hundreds != null) {
             String words = convertToWords(hundreds);
             sb.append(words);
-            String toAppend = words.length() > 0 ? " hundred ": "";
+            String toAppend = words.length() > 0 ? " Hundred ": "";
             sb.append(toAppend);
         }
 
@@ -67,7 +67,7 @@ public class AmountReader {
             sb.append(convertToWords(tens));
         }
         
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     private String convertToWords(String amount) {
